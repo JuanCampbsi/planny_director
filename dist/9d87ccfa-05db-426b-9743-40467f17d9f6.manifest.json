@@ -1,0 +1,70 @@
+{
+  "id": "9d87ccfa-05db-426b-9743-40467f17d9f6",
+  "alias": "AcessoRapidoPlanoDiretorWebPart",
+  "componentType": "WebPart",
+  "version": "0.0.1",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "supportedHosts": [
+    "SharePointWebPart",
+    "TeamsPersonalApp",
+    "TeamsTab",
+    "SharePointFullPage"
+  ],
+  "supportsThemeVariants": true,
+  "supportsFullBleed": true,
+  "preconfiguredEntries": [
+    {
+      "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+      "group": {
+        "default": "Advanced"
+      },
+      "title": {
+        "default": "acessoRapidoPlanoDiretor"
+      },
+      "description": {
+        "default": "acessoRapidoPlanoDiretor description"
+      },
+      "officeFabricIconFontName": "Page",
+      "properties": {
+        "description": "acessoRapidoPlanoDiretor"
+      }
+    }
+  ],
+  "loaderConfig": {
+    "internalModuleBaseUrls": [
+      "https://localhost:4321/dist/"
+    ],
+    "entryModuleId": "acesso-rapido-plano-diretor-web-part",
+    "scriptResources": {
+      "acesso-rapido-plano-diretor-web-part": {
+        "type": "path",
+        "path": "acesso-rapido-plano-diretor-web-part_5a829d1997514eee1dd5.js"
+      },
+      "@microsoft/sp-property-pane": {
+        "type": "component",
+        "id": "f9e737b7-f0df-4597-ba8c-3060f82380db",
+        "version": "1.11.0"
+      },
+      "AppWebPartStrings": {
+        "type": "path",
+        "path": "AppWebPartStrings_en-us_ab0373b2a20479e31e6fa297c55f351c.js"
+      },
+      "@microsoft/sp-webpart-base": {
+        "type": "component",
+        "id": "974a7777-0990-4136-8fa6-95d80114c2e0",
+        "version": "1.11.0"
+      },
+      "react": {
+        "type": "component",
+        "id": "0d910c1c-13b9-4e1c-9aa4-b008c5e42d7d",
+        "version": "16.13.1"
+      },
+      "react-dom": {
+        "type": "component",
+        "id": "aa0a46ec-1505-43cd-a44a-93f3a5aa460a",
+        "version": "16.13.1"
+      }
+    }
+  }
+}

@@ -1,0 +1,1 @@
+{"version":3,"file":"ITiposConteudo.d.ts","sourceRoot":"","sources":["../../../../src/webparts/app/interfaces/ITiposConteudo.ts"],"names":[],"mappings":"AAAA,MAAM,WAAW,mBAAmB;IAClC,EAAE,EAAE,MAAM,CAAC;IACX,KAAK,EAAE,MAAM,CAAC;CACf;AAED,MAAM,WAAW,sBAAsB;IACrC,EAAE,EAAE,MAAM,CAAC;IACX,IAAI,EAAE,MAAM,CAAC;IACb,KAAK,EAAE,MAAM,CAAC;IACd,cAAc,CAAC,EAAE,MAAM,CAAC;CACzB"}

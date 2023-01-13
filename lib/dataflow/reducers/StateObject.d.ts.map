@@ -1,0 +1,1 @@
+{"version":3,"file":"StateObject.d.ts","sourceRoot":"","sources":["../../../src/dataflow/reducers/StateObject.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,gBAAgB,EAAE,MAAM,8BAA8B,CAAC;AAEhE,OAAO,EAAE,gBAAgB,EAAE,MAAM,yCAAyC,CAAC;AAK3E,eAAO,MAAM,WAAW;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;iBAsBtB,CAAC;AAEH,eAAO,MAAQ,kBAAkB,8FAAE,gBAAgB,4FAAE,qBAAqB,iGAAE,sBAAsB,gGAAwB,CAAC"}

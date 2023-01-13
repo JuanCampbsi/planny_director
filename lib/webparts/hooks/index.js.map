@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../src/webparts/hooks/index.tsx"],"names":[],"mappings":"AAAA,OAAO,EAAE,WAAW,EAAE,MAAM,cAAc,CAAC;AAC3C,OAAO,EAAE,aAAa,EAAE,MAAM,eAAe,CAAC;AAE9C,MAAM,KAAK,GAAG;IACZ,UAAU,EAAE,WAAW;IACvB,YAAY,EAAE,aAAa;CAC5B,CAAC;AAEF,MAAM,CAAC,MAAM,EAAE,UAAU,EAAE,YAAY,EAAE,GAAG,KAAK,CAAC"}

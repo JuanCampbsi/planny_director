@@ -1,0 +1,2 @@
+export declare const useModulos: () => import("../app/interfaces/IModuloItems").IModuloItemsFormated[], useComplexos: () => import("../app/interfaces/IComplexoItems").IComplexoItems[];
+//# sourceMappingURL=index.d.ts.map

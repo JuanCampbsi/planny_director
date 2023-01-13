@@ -1,0 +1,1 @@
+{"version":3,"file":"useModulos.js","sourceRoot":"","sources":["../../../src/webparts/hooks/useModulos.tsx"],"names":[],"mappings":"AAAA,OAAO,EAAE,cAAc,EAAE,MAAM,sBAAsB,CAAC;AAEtD,MAAM,CAAC,MAAM,WAAW,GAAG,GAAG,EAAE;IAC9B,OAAO,cAAc,CAAC,CAAC,KAAK,EAAE,EAAE,CAAC,KAAK,CAAC,KAAK,CAAC,UAAU,CAAC,CAAC;AAC3D,CAAC,CAAC"}

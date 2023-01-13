@@ -1,0 +1,1 @@
+{"version":3,"file":"IGroupsInfo.d.ts","sourceRoot":"","sources":["../../../../src/webparts/app/interfaces/IGroupsInfo.ts"],"names":[],"mappings":"AAAA,MAAM,WAAW,gBAAgB;IAC/B,EAAE,EAAE,MAAM,CAAC;IACX,SAAS,EAAE,MAAM,CAAC;IAClB,KAAK,EAAE,MAAM,CAAC;IACd,KAAK,EAAE,MAAM,CAAC;IACd,GAAG,CAAC,EAAE,MAAM,CAAC;CACd"}

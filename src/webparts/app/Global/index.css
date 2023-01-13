@@ -1,0 +1,44 @@
+@import '../../../../node_modules/@syncfusion/ej2-base/styles/material.css';
+@import '../../../../node_modules/@syncfusion/ej2-icons/styles/material.css';
+@import '../../../../node_modules/@syncfusion/ej2-buttons/styles/material.css';
+@import '../../../../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css';
+@import '../../../../node_modules/@syncfusion/ej2-inputs/styles/material.css';
+@import '../../../../node_modules/@syncfusion/ej2-lists/styles/material.css';
+@import '../../../../node_modules/@syncfusion/ej2-navigations/styles/material.css';
+@import '../../../../node_modules/@syncfusion/ej2-popups/styles/material.css';
+@import '../../../../node_modules/@syncfusion/ej2-richtexteditor/styles/material.css';
+
+.shyHeader-67 {
+  display: none;
+}
+
+.ms-FocusZone {
+  display: none;
+}
+
+.ms-BasePicker .ms-FocusZone {
+  display: block;
+}
+
+.spAppAndPropertyPanelContainer .sp-appBar {
+  display: none;
+}
+
+.paging-dot {
+  width: 10px;
+  height: 10px;
+}
+
+.paging-item {
+  padding-right: 8px;
+}
+
+.paging-item active {
+  padding-right: 8px;
+}
+
+.paging-dot > circle {
+  r: 2;
+  cx: 2;
+  cy: 2;
+}

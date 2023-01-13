@@ -1,0 +1,1 @@
+{"version":3,"file":"User.d.ts","sourceRoot":"","sources":["../../../../src/webparts/app/repositories/User.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,cAAc,EAAE,MAAM,qBAAqB,CAAC;AACrD,OAAO,EAAE,aAAa,EAAE,MAAM,0BAA0B,CAAC;AACzD,OAAO,EAA4C,gBAAgB,EAAE,MAAM,yBAAyB,CAAC;AAErG,eAAO,MAAM,qBAAqB,WAAY,cAAc,EAAE,SAAS,aAAa,YAAY,GAAG,qBA2BlG,CAAC"}

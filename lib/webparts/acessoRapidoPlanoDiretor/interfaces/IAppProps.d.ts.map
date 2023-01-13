@@ -1,0 +1,1 @@
+{"version":3,"file":"IAppProps.d.ts","sourceRoot":"","sources":["../../../../src/webparts/acessoRapidoPlanoDiretor/interfaces/IAppProps.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,cAAc,EAAE,MAAM,4BAA4B,CAAC;AAE5D,oBAAY,UAAU;IACpB,GAAG,IAAA;IACH,KAAK,IAAA;CACN;AACD,MAAM,WAAW,SAAS;IACxB,WAAW,EAAE,MAAM,CAAC;IACpB,OAAO,EAAE,cAAc,CAAC;IACxB,UAAU,EAAE,UAAU,CAAC;CACxB"}

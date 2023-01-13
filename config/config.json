@@ -1,0 +1,37 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "app-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/app/AppWebPart.js",
+          "manifest": "./src/webparts/app/AppWebPart.manifest.json"
+        }
+      ]
+    },
+    "banner-plano-diretor-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/bannerPlanoDiretor/BannerPlanoDiretorWebPart.js",
+          "manifest": "./src/webparts/bannerPlanoDiretor/BannerPlanoDiretorWebPart.manifest.json"
+        }
+      ]
+    },
+    "acesso-rapido-plano-diretor-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/acessoRapidoPlanoDiretor/AcessoRapidoPlanoDiretorWebPart.js",
+          "manifest": "./src/webparts/acessoRapidoPlanoDiretor/AcessoRapidoPlanoDiretorWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "AppWebPartStrings": "lib/webparts/app/loc/{locale}.js",
+    "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js",
+    "BannerPlanoDiretorWebPartStrings": "lib/webparts/bannerPlanoDiretor/loc/{locale}.js",
+    "AcessoRapidoPlanoDiretorWebPartStrings": "lib/webparts/acessoRapidoPlanoDiretor/loc/{locale}.js"
+  }
+}
