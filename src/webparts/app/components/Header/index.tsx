@@ -53,6 +53,8 @@ const Header = ({ urlPicture }: IPicture) => {
               {menuItems.length > 0 && menuItems.map((item, index) => renderButton(item, index))}
               {!permission && menuItemsColaborador.length > 0 && menuItemsColaborador.map((item, index) => renderButton(item, index))}
               {!!permission && menuItemsAdmin.length > 0 && menuItemsAdmin.map((item, index) => renderButton(item, index))}
+              <li onClick={() => history.push('/Relatorios')}>Relatórios</li>
+              <li onClick={() => history.push('/Eventos')}>Eventos</li>
             </ul>
           </S.MenuList>
         </S.SectionMenu>

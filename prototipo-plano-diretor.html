@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Plano Diretor | Protótipo visual</title>
+  <style>
+    :root{--teal:#007e7a;--teal-dark:#006e69;--teal-soft:#e8f4f2;--yellow:#ecb11f;--ink:#283638;--muted:#758487;--line:#e5ebeb;--canvas:#f5f7f7;--white:#fff;--shadow:0 5px 20px #1838380a}
+    *{box-sizing:border-box}body{margin:0;background:var(--canvas);color:var(--ink);font:14px "Segoe UI",Arial,sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}
+    .topbar{height:64px;position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:27px;padding:0 5%;background:#fff;box-shadow:0 2px 8px #0000000c}
+    .brand{display:flex;align-items:center;gap:11px;min-width:180px;color:var(--ink);font-size:17px;font-weight:650}.brand-icon{width:25px;height:28px;display:grid;place-items:center;color:var(--teal)}
+    .main-nav{display:flex;gap:4px;overflow:auto;scrollbar-width:none}.main-nav button{border:0;background:transparent;border-radius:6px;padding:10px 11px;color:#59676a;font-size:12px;white-space:nowrap}.main-nav button:hover,.main-nav button.active{background:var(--teal-soft);color:var(--teal);font-weight:650}
+    .profile{display:flex;align-items:center;gap:10px;margin-left:auto;white-space:nowrap}.avatar{width:34px;height:34px;display:grid;place-items:center;border-radius:50%;background:#e3eeec;color:var(--teal);font-weight:700}.profile small,.profile strong{display:block}.profile small{color:#899597;font-size:10px}.profile strong{margin-top:2px;font-size:11px}
+    .banner{height:155px;display:flex;align-items:center;padding:20px 8%;background:linear-gradient(105deg,#005d59,#087f79 56%,#4a9a8e);color:white;position:relative;overflow:hidden}.banner:after{content:"";position:absolute;width:400px;height:400px;border:1px solid #ffffff1e;border-radius:50%;right:12%;top:-200px;box-shadow:0 0 0 38px #ffffff09,0 0 0 78px #ffffff08}
+    .banner-kicker{font-size:10px;letter-spacing:.15em;opacity:.75}.banner h1{font-size:27px;margin:8px 0 5px}.banner p{margin:0;color:#e0efec;font-size:12px}
+    .shell{max-width:1240px;margin:0 auto;padding:27px 24px 60px}.screen{display:none}.screen.active{display:block}.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:15px;margin:5px 0 19px}.section-head h2{font-size:25px;margin:3px 0 5px}.section-head p{margin:0;color:var(--muted);font-size:12px}.eyebrow{color:var(--teal);font-size:9px;font-weight:700;letter-spacing:.13em}.head-actions{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+    .btn{border:1px solid var(--line);border-radius:6px;background:#fff;color:#4d5d60;padding:9px 13px;font-size:11px;font-weight:600}.btn:hover{border-color:#9dc8c3;color:var(--teal)}.btn.primary{border-color:var(--teal);background:var(--teal);color:#fff}.btn.primary:hover{background:var(--teal-dark)}.btn.gold{border-color:var(--yellow);background:var(--yellow);color:#3d371f}.btn.danger{color:#b34b52}.btn.small{padding:7px 10px;font-size:10px}
+    .select,.input,.textarea{height:37px;border:1px solid #dbe3e3;border-radius:6px;background:#fff;padding:0 10px;color:#48575a;font-size:11px}.textarea{height:77px;padding:10px;resize:vertical}
+    .grid{display:grid;gap:13px}.kpis{grid-template-columns:repeat(4,1fr)}.card,.panel{border:1px solid var(--line);border-radius:9px;background:#fff;box-shadow:var(--shadow)}.kpi{padding:15px 16px;min-height:110px}.kpi-label{color:#7b898b;font-size:10px}.kpi-value{margin:8px 0 3px;font-size:25px;font-weight:700}.kpi-foot{color:#899597;font-size:9px}.up{color:#148470;font-weight:700}.panel{padding:17px 18px;margin-top:13px}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}.panel-head h3{margin:0;font-size:13px}.panel-head p{margin:4px 0 0;color:#8b989a;font-size:10px}.muted{color:#8b989a}
+    .home-grid{grid-template-columns:1.5fr .85fr}.hero-card{min-height:180px;padding:21px;border-radius:9px;background:linear-gradient(110deg,#0b6661,#338b80);color:#fff;position:relative;overflow:hidden}.hero-card:after{content:"";position:absolute;width:175px;height:175px;border:20px solid #ffffff12;border-radius:50%;right:9px;top:5px}.hero-card .eyebrow{color:#b7dfd7}.hero-card h2{font-size:20px;margin:12px 0 8px}.hero-card p{max-width:390px;color:#e1efed;font-size:11px;line-height:1.6}.hero-card .btn{position:relative;z-index:1;margin-top:9px}
+    .info-list{display:grid;gap:11px}.info-row{display:flex;gap:10px;padding-bottom:10px;border-bottom:1px solid #f0f2f2}.info-row:last-child{border:0;padding:0}.info-icon{width:29px;height:29px;display:grid;place-items:center;flex:0 0 auto;border-radius:7px;background:#fff5d9;color:#a57d16}.info-row strong{display:block;font-size:10px}.info-row small{display:block;margin-top:4px;color:#8b989a;font-size:9px}
+    .cycle{display:flex;align-items:center;gap:9px;overflow:auto;padding:12px 2px}.cycle button{flex:0 0 auto;width:61px;height:61px;border:1px solid #d7e4e2;border-radius:50%;background:white;color:#607174;font-size:10px}.cycle button.active,.cycle button:hover{border:2px solid var(--teal);background:var(--teal-soft);color:var(--teal);font-weight:700}.cycle-line{height:2px;min-width:16px;background:#dce5e4}
+    .module-cols{grid-template-columns:repeat(3,1fr)}.module-col{padding:16px}.module-col h3{display:flex;align-items:center;gap:9px;margin:0 0 13px;font-size:12px}.module-col h3 i{width:27px;height:27px;display:grid;place-items:center;border-radius:7px;background:var(--teal-soft);color:var(--teal);font-style:normal}.module-card{display:flex;align-items:center;justify-content:space-between;width:100%;margin:5px 0;padding:11px;border:1px solid #edf0f0;border-radius:6px;background:#fff;text-align:left;color:#39484a;font-size:10px}.module-card:hover{border-color:#9dc8c3;background:#f8fbfa}.module-card span:last-child{color:var(--teal)}
+    .report-grid{grid-template-columns:1.55fr .85fr}.chart{height:190px;display:flex;align-items:flex-end;justify-content:space-around;gap:12px;padding:14px 12px 0;background:repeating-linear-gradient(to bottom,transparent 0,transparent 39px,#eef2f1 40px)}.bar-group{height:100%;display:flex;align-items:flex-end;gap:4px;position:relative;padding-bottom:21px}.bar{width:14px;border-radius:3px 3px 0 0;background:var(--teal)}.bar.plan{background:#d5e6e3}.bar-label{position:absolute;bottom:2px;left:50%;transform:translateX(-50%);font-size:9px;color:#869395}.legend{display:flex;gap:12px;color:#748184;font-size:9px}.legend i{display:inline-block;width:7px;height:7px;border-radius:2px;background:var(--teal);margin-right:4px}.legend i.plan{background:#d5e6e3}
+    .donut-wrap{display:flex;align-items:center;justify-content:center;gap:20px;min-height:180px}.donut{width:123px;height:123px;display:grid;place-items:center;border-radius:50%;background:conic-gradient(var(--teal) 0 34%,#32958d 34% 62%,var(--yellow) 62% 84%,#8bc5be 84%)}.donut:before{content:"";grid-area:1/1;width:78px;height:78px;border-radius:50%;background:#fff}.donut-label{z-index:1;grid-area:1/1;text-align:center}.donut-label strong{display:block;font-size:20px}.donut-label small{font-size:9px;color:#849194}.legend-list{display:grid;gap:10px;min-width:145px}.legend-item{display:grid;grid-template-columns:8px 1fr auto;align-items:center;gap:7px;color:#718083;font-size:9px}.legend-item i{width:7px;height:7px;border-radius:50%;background:var(--teal)}.legend-item b{color:#344447}
+    .table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;text-align:left}th{padding:9px;border-bottom:1px solid #edf0f0;color:#96a1a2;font-size:8px;font-weight:600;letter-spacing:.04em;white-space:nowrap}td{padding:10px 9px;border-bottom:1px solid #f0f2f2;color:#738083;font-size:9px;white-space:nowrap}tbody tr:last-child td{border:0}td strong{display:block;color:#354447;font-size:10px}td small{display:block;margin-top:4px;color:#919c9e;font-size:8px;white-space:normal}.pill{display:inline-block;padding:4px 8px;border-radius:20px;background:#e8f5f1;color:#137665;font-size:8px;font-weight:650}.pill.warn{background:#fff4d9;color:#9c6906}.pill.progress{background:#eaf2fa;color:#487294}
+    .toolbar{display:flex;gap:8px;margin-bottom:15px}.toolbar .input{flex:1}.timeline{display:grid;gap:9px}.event-card{display:grid;grid-template-columns:27px 1fr;gap:12px}.event-rail{position:relative;display:flex;justify-content:center}.event-rail:after{content:"";position:absolute;top:20px;bottom:-10px;width:1px;background:#dce5e4}.event-card:last-child .event-rail:after{display:none}.event-dot{z-index:1;width:11px;height:11px;margin-top:18px;border:2px solid white;border-radius:50%;background:var(--teal);box-shadow:0 0 0 2px var(--teal)}.event-dot.warn{background:var(--yellow);box-shadow:0 0 0 2px var(--yellow)}.event-content{padding:13px 15px;border:1px solid var(--line);border-radius:8px;background:#fff}.event-top{display:flex;justify-content:space-between;gap:10px}.event-content h3{margin:0;font-size:11px}.event-content p{margin:5px 0;color:#829092;font-size:9px}.event-meta{display:flex;flex-wrap:wrap;gap:12px;margin-top:10px;padding-top:8px;border-top:1px solid #f0f2f2;color:#899597;font-size:8px}
+    .two-col{grid-template-columns:1.3fr .7fr}.upload-drop{min-height:130px;display:grid;place-items:center;text-align:center;border:2px dashed #c9d8d6;border-radius:8px;background:#f9fbfb}.upload-drop strong{display:block;margin-bottom:6px;font-size:12px}.upload-drop span{font-size:9px;color:#819092}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:15px}.field{display:grid;gap:5px;color:#59686a;font-size:9px;font-weight:600}.field.full{grid-column:1/-1}.field input,.field select,.field textarea{width:100%}.summary-row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #f0f2f2;color:#7f8b8d;font-size:10px}.summary-row strong{color:#344447}
+    .approval-list{display:grid;gap:11px}.approval{padding:15px;border:1px solid var(--line);border-radius:8px;background:#fff}.approval-head{display:flex;justify-content:space-between;gap:12px}.approval h3{margin:0;font-size:11px}.approval p{margin:6px 0;color:#869294;font-size:9px;line-height:1.5}.approval-actions{display:flex;gap:7px;margin-top:12px}
+    .admin-grid{grid-template-columns:repeat(3,1fr)}.admin-card{min-height:110px;padding:17px;text-align:left}.admin-card .admin-icon{width:30px;height:30px;display:grid;place-items:center;border-radius:7px;background:#fff5d9;color:#ad8314}.admin-card strong{display:block;margin:10px 0 4px;font-size:11px}.admin-card small{color:#889496;font-size:9px}
+    .component-grid{grid-template-columns:repeat(2,1fr)}.component-samples{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.sample-input{width:160px}.progress-track{height:5px;margin-top:9px;border-radius:5px;background:#edf0ef}.progress-track i{display:block;width:72%;height:100%;border-radius:5px;background:var(--teal)}
+    .side-by-side{display:grid;grid-template-columns:190px 1fr;gap:14px}.side-menu{align-self:start;padding:10px;background:#fff;border:1px solid var(--line);border-radius:8px}.side-menu button{display:block;width:100%;padding:10px;border:0;border-radius:5px;background:transparent;text-align:left;color:#647174;font-size:10px}.side-menu button.active{background:var(--teal-soft);color:var(--teal);font-weight:650}
+    .plan-view{display:none}.plan-view.active{display:block}.filter-grid{display:grid;grid-template-columns:repeat(5,minmax(105px,1fr)) auto;align-items:end;gap:9px}.profile-card{display:flex;align-items:center;gap:10px;padding:11px;border:1px solid #edf0f0;border-radius:7px}.profile-card strong{display:block;font-size:10px}.profile-card small{display:block;margin-top:3px;color:#879395;font-size:9px}
+    .modal-backdrop{position:fixed;inset:0;z-index:20;display:none;place-items:center;padding:20px;background:#14292980}.modal-backdrop.open{display:grid}.modal{width:min(480px,100%);padding:22px;border-radius:10px;background:#fff;box-shadow:0 20px 70px #0003}.modal h3{margin:0;font-size:16px}.modal p{color:#7b898b;font-size:11px;line-height:1.6}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:20px}
+    #toast{position:fixed;right:22px;bottom:22px;z-index:30;padding:12px 16px;border-radius:7px;background:#253a3b;color:#fff;font-size:11px;box-shadow:0 6px 20px #0002;opacity:0;transform:translateY(8px);transition:.2s;pointer-events:none}#toast.show{opacity:1;transform:translateY(0)}
+    .note{margin-top:12px;text-align:right;color:#a0aaab;font-size:8px}
+    @media(max-width:900px){.topbar{gap:10px;padding:0 3%}.brand{min-width:auto}.profile>div:last-child{display:none}.kpis{grid-template-columns:repeat(2,1fr)}.home-grid,.report-grid,.two-col{grid-template-columns:1fr}.module-cols{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:900px){.filter-grid{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:620px){.topbar{height:auto;min-height:58px;flex-wrap:wrap;padding:10px 14px}.main-nav{order:3;width:100%}.profile{margin-left:auto}.banner{height:125px;padding:18px 22px}.banner h1{font-size:22px}.shell{padding:20px 13px 40px}.section-head{align-items:flex-start;flex-direction:column}.kpis,.module-cols,.admin-grid,.component-grid{grid-template-columns:1fr 1fr}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.side-by-side{grid-template-columns:1fr}.side-menu{display:flex;overflow:auto}.side-menu button{white-space:nowrap}.donut-wrap{gap:12px}.legend-list{min-width:120px}.filter-grid{grid-template-columns:1fr 1fr}}
+  </style>
+  <style>
+    body{background:#fff;color:#555;font-family:"Segoe UI",Arial,sans-serif}
+    .topbar{height:65px;position:fixed;top:48px;left:0;right:0;z-index:15;gap:0;padding:0 37px;background:#fff;box-shadow:0 2px 4px #0000000d}
+    .brand{min-width:0;gap:26px;color:#555;font-size:19px;font-weight:400}
+    .brand-icon{width:23px;height:27px;flex:0 0 auto}
+    .brand-icon img{display:block;width:23px;height:27px}
+    .main-nav{flex:1;justify-content:flex-start;gap:38px;margin-left:72px;overflow-x:auto}
+    .main-nav button{padding:8px 0;border-radius:0;color:#555;font-size:14px}
+    .main-nav button:hover,.main-nav button.active{background:transparent;color:#292828;font-weight:600}
+    .profile-banner{height:139px;position:relative;display:flex;align-items:center;margin-top:65px;background:#007e7a url("src/webparts/app/assets/img/Banner.png") center/cover no-repeat;color:#fff}
+    .profile-picture{position:absolute;top:39px;left:max(8.4375rem,calc((100% - 1096px)/2));width:123px;height:123px;display:grid;place-items:center;border:1px solid #ffffff;border-radius:50%;background:#66646412}
+    .profile-picture img{width:108px;height:108px;object-fit:cover;border:5px solid #fff;border-radius:50%;box-shadow:inset 0 0 10px 10px #fff}
+    .profile-welcome{display:flex;flex-direction:column;gap:2px;margin:0 0 0 max(280px,calc((100% - 1096px)/2 + 158px));padding-top:10px}
+    .profile-welcome span{font-size:18px;line-height:23px}
+    .profile-welcome strong{font-size:25px;line-height:32px}
+    .shell{max-width:none;margin:0;padding:0 24px 60px}
+    .screen:not(#home){width:min(100%,1240px);margin:0 auto;padding:27px 0 60px}
+    .home-layout{width:min(100%,1096px);margin:0 auto}
+    .informative-layout{display:flex;align-items:flex-start;justify-content:center;gap:20px;padding-top:39px}
+    .carousel-card{width:631px;height:403px;position:relative;flex:0 1 631px;margin-top:19px;margin-bottom:87px}
+    .carousel-image{display:block;width:100%;height:100%;object-fit:cover}
+    .carousel-caption{position:absolute;left:30px;bottom:27px;width:338px;min-height:246px;padding:35px 35px 25px;background:transparent url("src/webparts/app/assets/img/PictureKnowMore.png") center/100% 100% no-repeat}
+    .carousel-caption h2{margin:0 0 16px;color:#007e7a;font-size:30px;line-height:35px}
+    .carousel-caption p{color:#555;font-size:18px;line-height:21px}
+    .carousel-caption button{margin-top:20px;border:0;background:transparent;color:#007e7a;font-weight:600}
+    .carousel-dots{position:absolute;right:16px;bottom:13px;display:flex;gap:8px}
+    .carousel-dots i{width:10px;height:10px;border-radius:50%;background:#ffffffa6}
+    .carousel-dots i.selected{background:#007e7a}
+    .informative-card{width:445px;height:405px;flex:0 1 445px;margin-top:19px;margin-bottom:98px;background:#fff;box-shadow:0 2px 4px #0000001a}
+    .informative-heading{height:60px;display:flex;align-items:center;gap:15px;border-bottom:1px solid #d3d3d380}
+    .informative-heading img{width:40px;height:40px;margin-left:20px}
+    .informative-heading h2{color:#007e7a;font-size:18px;font-weight:600}
+    .informative-list{height:calc(100% - 60px);overflow-y:auto;padding:0 20px}
+    .informative-item{min-height:101px;display:flex;align-items:flex-start;gap:20px;padding:15px 0 12px;border-bottom:1px solid #d3d3d380;color:inherit;text-decoration:none}
+    .informative-item:last-child{border-bottom:0}
+    .informative-item>img{width:118px;height:75px;flex:0 0 118px;object-fit:cover}
+    .informative-item>span{min-width:0}
+    .informative-item strong,.informative-item small,.informative-item time{display:block}
+    .informative-item strong{overflow:hidden;color:#007e7a;font-size:14px;line-height:18px;text-overflow:ellipsis}
+    .informative-item small{display:-webkit-box;overflow:hidden;margin-top:5px;color:#555;font-size:12px;line-height:16px;-webkit-box-orient:vertical;-webkit-line-clamp:2}
+    .informative-item time{margin-top:5px;color:#a5a5a5;font-size:10px}
+    .cycle-section{height:145px;position:relative;display:flex;align-items:flex-end;justify-content:center;margin:0 calc(50% - 50vw);padding:0 24px 10px;background:#f7f9f9}
+    .cycle-label{position:absolute;top:-23px;left:50%;z-index:2;min-height:47px;display:flex;align-items:center;justify-content:center;gap:15px;padding:0 34px;transform:translateX(-50%);background:#0abb98;color:#fff;white-space:nowrap}
+    .cycle-label img{width:20px;height:20px}
+    .cycle-label span{font-size:18px}
+    .cycle-track{width:min(100%,800px);height:80px;display:flex;align-items:center;justify-content:space-between;gap:24px;overflow-x:auto;scrollbar-width:none}
+    .cycle-track::-webkit-scrollbar{display:none}
+    .cycle-track button{position:relative;z-index:1;width:69px;height:69px;flex:0 0 69px;border:3px solid #fff;border-radius:50%;background:#ededed;color:#555;font-size:18px;font-weight:600}
+    .cycle-track button+button:before{position:absolute;top:50%;right:calc(100% + 3px);z-index:-1;width:27px;height:3px;background:#ededed;content:""}
+    .cycle-track button.selected{background:#ecb11f;color:#fff}
+    .map-card{height:590px;position:relative;margin:88px auto 65px;background:#007470ed;box-shadow:0 0 10px #00000040;color:#fff}
+    .map-card-heading{height:60px;display:flex;align-items:center;padding:0 30px;background:#007e7a url("src/webparts/app/assets/img/BarraModal.png") center/cover no-repeat}
+    .map-card-heading span{font-size:20px;font-weight:600}
+    .map-card-content{height:calc(100% - 60px);display:grid;grid-template-columns:1fr 1fr}
+    .map-illustration{display:grid;place-items:center;padding:25px;background:url("src/webparts/app/assets/icons/MapaBackground.svg") center/contain no-repeat}
+    .map-illustration img{width:min(100%,480px);height:100%;max-height:425px;object-fit:contain}
+    .map-filters{display:flex;flex-direction:column;gap:13px;padding:37px 66px 30px 51px;background:#007470}
+    .map-focus{min-height:55px;display:flex;align-items:center;gap:20px}
+    .map-focus img{width:43px;height:43px;object-fit:contain}
+    .map-focus strong,.map-focus span{display:block}
+    .map-focus strong{font-size:20px;font-weight:600}
+    .map-focus span{margin-top:5px;font-size:16px}
+    .map-divider{height:1px;margin:3px 0 4px;background:#006c68}
+    .map-filters label{display:grid;gap:9px;font-size:12px;font-weight:600}
+    .map-filters select{width:100%;height:42px;padding:0 13px;border:1px solid #ffffffa6;border-radius:0;background:#fff;color:#555;font-size:13px}
+    .map-actions{display:flex;justify-content:flex-end;gap:14px;margin-top:auto}
+    .map-actions button{min-height:42px;padding:0 16px;border:1px solid #fff;background:transparent;color:#fff;font-size:12px;font-weight:600}
+    .map-actions .map-print:disabled{border-color:#a5a5a5;background:#a5a5a5;cursor:not-allowed}
+    .map-actions .map-view{border-color:#ecb11f;background:#ecb11f;color:#333}
+    .description-card{width:100%;height:338px;display:flex;align-items:flex-start;margin:0 auto 73px;padding:55px 30px;background:linear-gradient(90deg,#ffffffed 0%,#ffffffe0 45%,#ffffff05 100%),url("src/webparts/app/assets/img/PictureCarroselTwo.png") center/cover no-repeat}
+    .description-copy{width:459px;min-height:229px;padding:37px 35px;background:transparent url("src/webparts/app/assets/img/LabelFundoTextPD.png") center/100% 100% no-repeat}
+    .description-copy h2{margin:0 0 16px;color:#007e7a;font-size:30px;line-height:35px}
+    .description-copy p{color:#555;font-size:14px;line-height:22px}
+    .modules-section{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));justify-content:center;gap:59px;margin:0 auto 24px}
+    .module-column{min-width:0}
+    .module-heading{min-height:61px;display:flex;align-items:center;gap:15px;position:relative;margin-bottom:36px}
+    .module-heading:after{position:absolute;right:0;bottom:-15px;left:0;border-top:2px solid #e6e6e6;content:""}
+    .module-heading img{width:60px;height:60px;object-fit:contain}
+    .module-heading h2{color:#555;font-size:18px;font-weight:600;line-height:35px}
+    .module-links{display:flex;flex-wrap:wrap;gap:20px}
+    .module-tile{width:140px;height:172px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:15px;padding:15px 10px 25px;border:1px solid transparent;background:#fff;box-shadow:0 3px 6px #0000000d;color:#747678;cursor:pointer}
+    .module-tile:hover{border-color:#007e7a;background:#f1f1f1b0}
+    .module-tile img{width:77px;height:77px;object-fit:contain}
+    .module-tile span{font-size:16px;line-height:20px;text-align:center;text-transform:capitalize}
+    @media(max-width:1100px){.main-nav{margin-left:35px;gap:20px}.informative-layout{flex-wrap:wrap}.carousel-card,.informative-card{flex-basis:100%;max-width:631px}.carousel-card{margin-bottom:10px}.informative-card{margin-bottom:55px}.modules-section{gap:24px}.module-heading h2{font-size:16px}}
+    @media(max-width:700px){.topbar{top:48px;height:auto;min-height:65px;flex-wrap:wrap;padding:10px 16px}.brand{height:35px;gap:12px}.main-nav{order:3;width:100%;margin:7px 0 0;gap:20px}.profile-banner{height:120px;margin-top:95px}.profile-picture{top:24px;left:18px;width:90px;height:90px}.profile-picture img{width:78px;height:78px}.profile-welcome{margin-left:125px;padding-top:5px}.profile-welcome span{font-size:14px}.profile-welcome strong{font-size:20px}.shell{padding:0 14px 40px}.informative-layout{padding-top:24px}.carousel-card{height:300px}.carousel-caption{left:12px;bottom:12px;width:min(80%,300px);min-height:0;padding:24px;background-size:100% 100%}.carousel-caption h2,.description-copy h2{font-size:23px;line-height:28px}.carousel-caption p{font-size:14px;line-height:18px}.informative-card{height:360px}.informative-item{gap:12px}.informative-item>img{width:90px;height:62px;flex-basis:90px}.cycle-section{height:125px;padding-right:12px;padding-left:12px}.cycle-label{max-width:calc(100% - 24px);gap:9px;padding:0 12px;white-space:normal}.cycle-label span{font-size:13px}.cycle-track{justify-content:flex-start;gap:18px}.cycle-track button{width:58px;height:58px;flex-basis:58px;font-size:15px}.cycle-track button+button:before{width:20px}.map-card{height:auto;margin:45px auto;padding-bottom:0}.map-card-heading{height:52px}.map-card-content{height:auto;grid-template-columns:1fr}.map-illustration{height:300px;padding:20px}.map-filters{padding:25px 20px}.map-focus strong{font-size:17px}.map-actions{margin-top:12px}.map-actions button{padding:0 10px;font-size:11px}.description-card{height:auto;min-height:260px;margin-bottom:50px;padding:25px 14px}.description-copy{width:min(100%,459px);min-height:0;padding:28px 24px}.description-copy p{font-size:13px}.modules-section{grid-template-columns:1fr;gap:42px}.module-column{max-width:100%}.module-links{gap:10px}.module-tile{width:calc(33.333% - 7px);height:150px}.module-tile img{width:60px;height:60px}.module-tile span{font-size:13px}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-icon"><img src="src/webparts/app/assets/icons/IconePD.svg" alt=""></span><span>Plano Diretor</span></div>
+    <nav class="main-nav" aria-label="Navegação principal">
+      <button class="active" data-screen="home">Início</button><button data-screen="plano">Plano</button><button data-screen="reports">Relatórios</button><button data-screen="events">Eventos</button><button data-screen="upload">Upload de arquivos</button><button data-screen="approval">Fluxo de aprovação</button><button data-screen="admin">Administração</button><button data-screen="about">Sobre</button>
+    </nav>
+  </header>
+  <section class="profile-banner">
+    <div class="profile-picture"><img src="src/webparts/app/assets/img/Profile.png" alt="Foto de perfil"></div>
+    <div class="profile-welcome"><span>Como é bom ter você de volta!</span><strong>Mariana Costa</strong></div>
+  </section>
+
+  <main class="shell">
+    <section class="screen active" id="home">
+      <div class="home-layout">
+        <section class="informative-layout" aria-label="Informativos do Plano Diretor">
+          <article class="carousel-card">
+            <img class="carousel-image" src="src/webparts/app/assets/img/PictureCarrosel.png" alt="Equipe trabalhando em uma ferrovia">
+            <div class="carousel-caption"><h2>Plano Diretor</h2><p>Planejamento integrado para construir o futuro.</p><button type="button" onclick="showScreen('plano')">Saiba mais</button></div>
+            <div class="carousel-dots" aria-hidden="true"><i class="selected"></i><i></i><i></i></div>
+          </article>
+          <article class="informative-card">
+            <div class="informative-heading"><img src="src/webparts/app/assets/icons/IconInformatives.svg" alt=""><h2>Informativos</h2></div>
+            <div class="informative-list">
+              <a class="informative-item" href="#informativo-ciclo" onclick="event.preventDefault();toast('Informativo: atualização do ciclo plurianual')"><img src="src/webparts/app/assets/img/FotoInfo1.png" alt=""><span><strong>Atualização do ciclo plurianual</strong><small>Novos marcos disponíveis</small><time>03.10.2026</time></span></a>
+              <a class="informative-item" href="#informativo-comite" onclick="event.preventDefault();toast('Informativo: comitê de planejamento')"><img src="src/webparts/app/assets/img/FotoInfo2.png" alt=""><span><strong>Comitê de planejamento</strong><small>Confira as principais decisões</small><time>29.09.2026</time></span></a>
+              <a class="informative-item" href="#informativo-revisao" onclick="event.preventDefault();toast('Informativo: revisão trimestral')"><img src="src/webparts/app/assets/img/FotoInfo3.png" alt=""><span><strong>Revisão trimestral</strong><small>Resultados do período publicados</small><time>26.09.2026</time></span></a>
+            </div>
+          </article>
+        </section>
+
+        <section class="cycle-section" aria-label="Ciclo plurianual">
+          <div class="cycle-label"><img src="src/webparts/app/assets/icons/IconeMouse.svg" alt=""><span>Escolha o Ciclo Plurianual para consultar o Plano Diretor</span></div>
+          <div class="cycle-track" id="homeCycleTrack">
+            <button type="button" data-cycle="2018">2018</button><button type="button" data-cycle="2019">2019</button><button type="button" data-cycle="2020">2020</button><button type="button" data-cycle="2021">2021</button><button type="button" data-cycle="2022">2022</button><button type="button" data-cycle="2023">2023</button><button type="button" data-cycle="2024">2024</button><button type="button" data-cycle="2025">2025</button><button type="button" class="selected" data-cycle="2026">2026</button><button type="button" data-cycle="2027">2027</button>
+          </div>
+        </section>
+
+        <section class="map-card" aria-label="Mapa e filtros do Plano Diretor">
+          <div class="map-card-heading"><span id="mapCycleTitle">Ciclo 2026</span></div>
+          <div class="map-card-content">
+            <div class="map-illustration"><img src="src/webparts/app/assets/icons/Mapa.svg" alt="Mapa estratégico do Plano Diretor"></div>
+            <aside class="map-filters">
+              <div class="map-focus"><img src="src/webparts/app/assets/img/ElipseCapacete.png" alt=""><div><strong>Acesse selecionando no mapa!</strong><span id="selectedCorridor">Selecione um corredor no mapa</span></div></div>
+              <div class="map-divider"></div>
+              <label>Corredor<select id="corridorFilter"><option value="">Selecione aqui um corredor</option><option>Norte</option><option>Sul</option><option>Leste</option><option>Oeste</option></select></label>
+              <label>Complexo<select id="complexFilter"><option>Selecione aqui um complexo</option><option>Complexo A</option><option>Complexo B</option></select></label>
+              <label>Fase<select id="phaseFilter"><option>Selecione aqui uma fase</option><option>Planejamento</option><option>Execução</option><option>Concluída</option></select></label>
+              <div class="map-actions"><button class="map-print" type="button" onclick="toast('Selecione um corredor para imprimir o Plano Diretor')" disabled>Imprimir plano diretor</button><button class="map-view" type="button" onclick="showScreen('plano')">Visualizar</button></div>
+            </aside>
+          </div>
+        </section>
+
+        <section class="description-card">
+          <div class="description-copy"><h2>Plano Diretor</h2><p>O Plano Diretor integra iniciativas, objetivos e projetos prioritários. Consulte os ciclos plurianuais, acompanhe os corredores e explore os módulos para acessar os conteúdos e informações do planejamento.</p></div>
+        </section>
+
+        <section class="modules-section" aria-label="Módulos do Plano Diretor">
+          <div class="module-column">
+            <div class="module-heading"><img src="src/webparts/app/assets/icons/IconEntrada.svg" alt=""><h2>Entradas</h2></div>
+            <div class="module-links"><button class="module-tile" onclick="showScreen('plano')"><img src="src/webparts/app/assets/icons/IconView.svg" alt=""><span>Planejamento</span></button><button class="module-tile" onclick="showScreen('plano')"><img src="src/webparts/app/assets/icons/IconEdit.svg" alt=""><span>Engenharia</span></button><button class="module-tile" onclick="showScreen('plano')"><img src="src/webparts/app/assets/icons/IconArquivoPDF.svg" alt=""><span>Investimentos</span></button></div>
+          </div>
+          <div class="module-column">
+            <div class="module-heading"><img src="src/webparts/app/assets/icons/IconManutencaoEOperacao.svg" alt=""><h2>Manutenção e Operação</h2></div>
+            <div class="module-links"><button class="module-tile" onclick="showScreen('plano')"><img src="src/webparts/app/assets/icons/IconView.svg" alt=""><span>Operação</span></button><button class="module-tile" onclick="showScreen('plano')"><img src="src/webparts/app/assets/icons/IconEdit.svg" alt=""><span>Gestão de ativos</span></button><button class="module-tile" onclick="showScreen('plano')"><img src="src/webparts/app/assets/icons/IconArquivoPDF.svg" alt=""><span>Sustentabilidade</span></button></div>
+          </div>
+          <div class="module-column">
+            <div class="module-heading"><img src="src/webparts/app/assets/icons/IconSaida.svg" alt=""><h2>Saída</h2></div>
+            <div class="module-links"><button class="module-tile" onclick="showScreen('plano')"><img src="src/webparts/app/assets/icons/IconView.svg" alt=""><span>Projetos</span></button><button class="module-tile" onclick="showScreen('plano')"><img src="src/webparts/app/assets/icons/IconEdit.svg" alt=""><span>Contratações</span></button><button class="module-tile" onclick="showScreen('plano')"><img src="src/webparts/app/assets/icons/IconArquivoPDF.svg" alt=""><span>Indicadores</span></button></div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="screen" id="plano">
+      <div class="section-head"><div><div class="eyebrow">CONTEÚDO DO PLANO</div><h2>Plano Diretor</h2><p>Módulos, contexto, análise crítica e equipe responsável.</p></div><div class="head-actions"><button class="btn" onclick="toast('Filtro de ciclos aplicado')">Ciclo: 2026⌄</button><button class="btn" onclick="toast('Filtros do mapa atualizados')">Filtros do mapa</button></div></div>
+      <div class="side-by-side">
+        <aside class="side-menu"><button class="active" onclick="selectPlanSection(this,'plan-context')">Contexto do tema</button><button onclick="selectPlanSection(this,'plan-critical')">Análise crítica</button><button onclick="selectPlanSection(this,'plan-team')">Equipe responsável</button><button onclick="selectPlanSection(this,'plan-documents')">Documentos</button></aside>
+        <div>
+          <article class="panel" style="margin:0 0 13px"><div class="panel-head"><div><div class="eyebrow">MAPA ESTRATÉGICO</div><h3 style="margin-top:5px">Módulos do Plano Diretor</h3><p>Selecione um módulo para consultar seus objetivos e conteúdos.</p></div><button class="btn small" onclick="toast('Mapa ampliado')">⌕ Ampliar mapa</button></div><div class="grid module-cols">
+            <div class="card module-col"><h3><i>↓</i>Entradas</h3><button class="module-card" onclick="toast('Módulo: Planejamento')">Planejamento <span>→</span></button><button class="module-card" onclick="toast('Módulo: Engenharia')">Engenharia <span>→</span></button><button class="module-card" onclick="toast('Módulo: Investimentos')">Investimentos <span>→</span></button></div>
+            <div class="card module-col"><h3><i>↻</i>Manutenção e Operação</h3><button class="module-card" onclick="toast('Módulo: Operação')">Operação <span>→</span></button><button class="module-card" onclick="toast('Módulo: Gestão de ativos')">Gestão de ativos <span>→</span></button><button class="module-card" onclick="toast('Módulo: Sustentabilidade')">Sustentabilidade <span>→</span></button></div>
+            <div class="card module-col"><h3><i>↑</i>Saídas</h3><button class="module-card" onclick="toast('Módulo: Projetos')">Projetos <span>→</span></button><button class="module-card" onclick="toast('Módulo: Contratações')">Contratações <span>→</span></button><button class="module-card" onclick="toast('Módulo: Indicadores')">Indicadores <span>→</span></button></div>
+          </div></article>
+          <article class="panel" style="margin:0 0 13px"><div class="filter-grid">
+            <label class="field">Ciclo<select class="select"><option>2026</option><option>2025</option><option>2024</option></select></label><label class="field">Corredor<select class="select"><option>Todos</option><option>Norte</option><option>Sul</option></select></label><label class="field">Complexo<select class="select"><option>Todos</option><option>Complexo A</option></select></label><label class="field">Fase<select class="select"><option>Todas</option><option>Planejamento</option></select></label><label class="field">Capítulo/Módulo<select class="select"><option>Todos</option><option>Engenharia</option></select></label><button class="btn primary" onclick="toast('Filtros aplicados')">Filtrar</button>
+          </div></article>
+          <section class="plan-view active" id="plan-context"><article class="panel"><div class="panel-head"><div><h3>Contexto do tema</h3><p>Visão geral e direcionadores estratégicos</p></div><button class="btn small" onclick="toast('Conteúdo do módulo aberto')">Abrir conteúdo</button></div><p class="muted" style="font-size:10px;line-height:1.7">O Plano Diretor organiza as iniciativas prioritárias, conecta objetivos estratégicos às entregas e orienta a evolução do planejamento ao longo de cada ciclo. Os filtros acima representam os seletores de ciclo, corredor, complexo, fase e módulo.</p><div class="component-samples" style="margin-top:14px"><span class="pill">Ciclo 2026</span><span class="pill progress">Engenharia</span><button class="btn small" onclick="toast('Documento aberto')">Ver documentos do tema</button></div></article></section>
+          <section class="plan-view" id="plan-critical"><article class="panel"><div class="panel-head"><div><h3>Análise crítica</h3><p>Análise do conteúdo conforme filtros selecionados</p></div><button class="btn primary small" onclick="toast('Análise atualizada com os filtros')">Filtrar análise</button></div><div style="padding:15px;border-left:3px solid var(--yellow);background:#fffaf0;border-radius:3px"><strong style="font-size:10px">Ponto de atenção · Engenharia</strong><p class="muted" style="font-size:10px;line-height:1.7;margin-top:7px">A atualização do cronograma executivo depende da validação do escopo técnico. Recomenda-se acompanhar o marco de contratação para evitar impacto na sequência das entregas do ciclo.</p></div><div class="component-samples" style="margin-top:13px"><span class="pill warn">Acompanhamento recomendado</span><span class="muted" style="font-size:9px">Atualizado em 03.10.2026</span></div></article></section>
+          <section class="plan-view" id="plan-team"><article class="panel"><div class="panel-head"><div><h3>Equipe responsável</h3><p>Grupos de edição e visualização do conteúdo</p></div><button class="btn primary small" onclick="toast('Equipe atualizada conforme os filtros')">Filtrar equipe</button></div><div class="grid two-col"><div><div class="eyebrow" style="margin:8px 0">EQUIPE RESPONSÁVEL PELA EDIÇÃO</div><div class="profile-card"><span class="avatar">MC</span><div><strong>Mariana Costa</strong><small>Planejamento integrado</small></div></div><div class="profile-card" style="margin-top:7px"><span class="avatar">RC</span><div><strong>Rafael Costa</strong><small>Engenharia de projetos</small></div></div></div><div><div class="eyebrow" style="margin:8px 0">VISUALIZADORES DO CONTEÚDO</div><div class="profile-card"><span class="avatar">ET</span><div><strong>Equipe Técnica</strong><small>Visualização do módulo</small></div></div><div class="profile-card" style="margin-top:7px"><span class="avatar">CD</span><div><strong>Comitê Diretor</strong><small>Visualização executiva</small></div></div></div></div></article></section>
+          <section class="plan-view" id="plan-documents"><article class="panel"><div class="panel-head"><div><h3>Conteúdos do módulo</h3><p>Documentos e materiais vinculados aos filtros ativos</p></div><button class="btn primary small" onclick="toast('Conteúdo do módulo')">Adicionar conteúdo</button></div><div class="table-wrap"><table><thead><tr><th>DOCUMENTO</th><th>CATEGORIA</th><th>RESPONSÁVEL</th><th>ATUALIZAÇÃO</th><th>AÇÃO</th></tr></thead><tbody><tr><td><strong>Estudo de viabilidade</strong><small>ENG-VIAB-2026.pdf</small></td><td>Projeto</td><td>Equipe de Engenharia</td><td>03.10.2026</td><td><button class="btn small" onclick="toast('Documento aberto')">Visualizar</button></td></tr><tr><td><strong>Cronograma executivo</strong><small>CRONOGRAMA-CICLO.xlsx</small></td><td>Planejamento</td><td>Escritório de Projetos</td><td>01.10.2026</td><td><button class="btn small" onclick="toast('Documento aberto')">Visualizar</button></td></tr></tbody></table></div></article></section>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" id="reports">
+      <div class="section-head"><div><div class="eyebrow">ACOMPANHAMENTO EXECUTIVO</div><h2>Relatórios</h2><p>Indicadores e evolução dos projetos do Plano Diretor.</p></div><div class="head-actions"><select class="select" id="reportPeriod" aria-label="Período"><option value="30">Últimos 30 dias</option><option value="90">Últimos 90 dias</option><option value="365">Último ano</option></select><button class="btn primary" onclick="exportCsv()">⇩ &nbsp;Exportar relatório</button></div></div>
+      <div class="grid kpis"><article class="card kpi"><div class="kpi-label">Projetos no plano</div><div class="kpi-value">24</div><div class="kpi-foot"><span class="up">↑ 8,2%</span> em relação ao período anterior</div></article><article class="card kpi"><div class="kpi-label">Marcos concluídos</div><div class="kpi-value" id="milestoneValue">21 <span class="muted" style="font-size:13px">/ 32</span></div><div class="kpi-foot"><span class="up">↑ 12,5%</span> de progresso no período</div></article><article class="card kpi"><div class="kpi-label">Execução média</div><div class="kpi-value">81%</div><div class="progress-track"><i></i></div></article><article class="card kpi"><div class="kpi-label">Itens em atenção</div><div class="kpi-value">4</div><div class="kpi-foot">Requerem acompanhamento da equipe</div></article></div>
+      <div class="grid report-grid">
+        <article class="panel"><div class="panel-head"><div><h3>Evolução do plano</h3><p>Execução planejada x realizada</p></div><div class="legend"><span><i class="plan"></i>Planejado</span><span><i></i>Realizado</span></div></div><div class="chart">
+          <div class="bar-group"><i class="bar plan" style="height:48%"></i><i class="bar" style="height:42%"></i><span class="bar-label">Mai</span></div><div class="bar-group"><i class="bar plan" style="height:55%"></i><i class="bar" style="height:50%"></i><span class="bar-label">Jun</span></div><div class="bar-group"><i class="bar plan" style="height:63%"></i><i class="bar" style="height:58%"></i><span class="bar-label">Jul</span></div><div class="bar-group"><i class="bar plan" style="height:70%"></i><i class="bar" style="height:65%"></i><span class="bar-label">Ago</span></div><div class="bar-group"><i class="bar plan" style="height:78%"></i><i class="bar" style="height:72%"></i><span class="bar-label">Set</span></div><div class="bar-group"><i class="bar plan" style="height:86%"></i><i class="bar" style="height:81%"></i><span class="bar-label">Out</span></div>
+        </div></article>
+        <article class="panel"><div class="panel-head"><div><h3>Distribuição por frente</h3><p>Projetos ativos por categoria</p></div></div><div class="donut-wrap"><div class="donut"><div class="donut-label"><strong>24</strong><small>projetos</small></div></div><div class="legend-list"><div class="legend-item"><i></i><span>Entradas</span><b>34%</b></div><div class="legend-item"><i style="background:#32958d"></i><span>Manutenção e operação</span><b>28%</b></div><div class="legend-item"><i style="background:#ecb11f"></i><span>Saídas</span><b>22%</b></div><div class="legend-item"><i style="background:#8bc5be"></i><span>Governança</span><b>16%</b></div></div></div></article>
+      </div>
+      <article class="panel"><div class="panel-head"><div><h3>Atividade recente</h3><p>Últimos eventos registrados no Plano Diretor</p></div><button class="btn small" data-go="events">Ver todos os eventos →</button></div><div class="table-wrap"><table><thead><tr><th>EVENTO</th><th>MÓDULO</th><th>RESPONSÁVEL</th><th>DATA</th><th>STATUS</th></tr></thead><tbody id="reportTable"></tbody></table></div></article><div class="note">Dados demonstrativos para visualização do protótipo.</div>
+    </section>
+
+    <section class="screen" id="events">
+      <div class="section-head"><div><div class="eyebrow">HISTÓRICO DO PLANO</div><h2>Eventos</h2><p>Acompanhe atualizações, marcos e decisões registrados pelas equipes.</p></div><div><span class="pill"><b id="eventCount">6</b> eventos</span></div></div>
+      <div class="toolbar"><input class="input" id="eventSearch" placeholder="⌕  Buscar evento, módulo ou responsável..." aria-label="Buscar eventos"><select class="select" id="eventStatus" aria-label="Filtrar por status"><option>Todos</option><option>Concluído</option><option>Em andamento</option><option>Atenção</option></select><button class="btn" onclick="clearEventFilters()">Limpar filtros</button></div>
+      <div class="timeline" id="eventList"></div><div class="note">Dados demonstrativos para visualização do protótipo.</div>
+    </section>
+
+    <section class="screen" id="upload">
+      <div class="section-head"><div><div class="eyebrow">GESTÃO DOCUMENTAL</div><h2>Upload de arquivos</h2><p>Centralize a entrega de documentos para revisão e aprovação.</p></div></div>
+      <div class="grid two-col"><article class="panel"><label class="upload-drop" for="filePicker"><div><strong>＋ &nbsp; Arraste e solte arquivos aqui</strong><span>ou clique para selecionar PDF, XLSX, DOCX e imagens.</span><input id="filePicker" type="file" multiple hidden onchange="showFiles(this)"></div></label><div id="fileNames" class="muted" style="font-size:9px;margin-top:9px"></div>
+        <form class="form-grid" onsubmit="submitUpload(event)"><label class="field">Nome do documento<input class="input" placeholder="Ex.: Anexo Plano Diretor"></label><label class="field">Categoria<select class="select"><option>Projeto</option><option>Relatório</option><option>Checklist</option><option>Comunicado</option></select></label><label class="field">Responsável<input class="input" placeholder="Nome da equipe ou gestor"></label><label class="field">Observações<textarea class="textarea" placeholder="Descreva o objetivo, prazo ou contexto do envio"></textarea></label><div class="field full" style="display:flex;flex-direction:row"><button class="btn" type="button" onclick="toast('Rascunho salvo')">Salvar rascunho</button><button class="btn primary" type="submit">Enviar para aprovação</button></div></form>
+      </article><article class="panel"><div class="panel-head"><div><h3>Resumo do envio</h3><p>Informações do documento</p></div></div><div class="summary-row"><span>Quantidade de arquivos</span><strong id="fileCount">0</strong></div><div class="summary-row"><span>Categoria</span><strong>Projeto</strong></div><div class="summary-row"><span>Responsável</span><strong>Não informado</strong></div><div class="summary-row"><span>Prazo solicitado</span><strong>3 dias úteis</strong></div><div class="summary-row"><span>Status</span><strong id="uploadStatus">Rascunho</strong></div></article></div>
+    </section>
+
+    <section class="screen" id="approval">
+      <div class="section-head"><div><div class="eyebrow">GESTÃO DE DOCUMENTOS</div><h2>Fluxo de aprovação</h2><p>Acompanhe pendências, revisões e decisões concluídas.</p></div></div>
+      <div class="grid kpis"><article class="card kpi"><div class="kpi-label">Pendentes</div><div class="kpi-value" id="pendingCount">1</div></article><article class="card kpi"><div class="kpi-label">Em revisão</div><div class="kpi-value" id="reviewCount">1</div></article><article class="card kpi"><div class="kpi-label">Aprovados</div><div class="kpi-value" id="approvedCount">1</div></article><article class="card kpi"><div class="kpi-label">Recusados</div><div class="kpi-value" id="rejectedCount">0</div></article></div>
+      <div class="grid two-col"><article class="panel"><div class="panel-head"><div><h3>Documentos para avaliação</h3><p>Selecione uma ação para atualizar o status</p></div></div><div class="approval-list" id="approvalList"></div></article><article class="panel"><div class="panel-head"><div><h3>Etapas do fluxo</h3><p>Processo de análise do documento</p></div></div><div class="event-card"><div class="event-rail"><i class="event-dot"></i></div><div class="event-content"><h3>Envio para avaliação</h3><p>Documento recebido para análise.</p></div></div><div class="event-card"><div class="event-rail"><i class="event-dot"></i></div><div class="event-content"><h3>Revisão técnica</h3><p>Validação de conteúdo e anexos.</p></div></div><div class="event-card"><div class="event-rail"><i class="event-dot warn"></i></div><div class="event-content"><h3>Aprovação final</h3><p>Decisão do gestor responsável.</p></div></div></article></div>
+    </section>
+
+    <section class="screen" id="admin">
+      <div class="section-head"><div><div class="eyebrow">CONFIGURAÇÃO DO SISTEMA</div><h2>Painel Administrativo</h2><p>Gerencie as listas, permissões e conteúdos do Plano Diretor.</p></div></div>
+      <div class="grid admin-grid"><button class="card admin-card" onclick="toast('Criar/Editar Módulo · SharePoint')"><span class="admin-icon">✎</span><strong>Criar/Editar Módulo</strong><small>Configuração dos módulos do plano</small></button><button class="card admin-card" onclick="toast('Criar/Editar Ciclo · SharePoint')"><span class="admin-icon">◷</span><strong>Criar/Editar Ciclo</strong><small>Ciclos plurianuais e períodos</small></button><button class="card admin-card" onclick="toast('Criar/Editar Corredor · SharePoint')"><span class="admin-icon">↔</span><strong>Criar/Editar Corredor</strong><small>Corredores do mapa estratégico</small></button><button class="card admin-card" onclick="toast('Criar/Editar Fase · SharePoint')"><span class="admin-icon">◈</span><strong>Criar/Editar Fase</strong><small>Etapas de execução do plano</small></button><button class="card admin-card" onclick="toast('Administrar Grupos · SharePoint')"><span class="admin-icon">♙</span><strong>Administrar Grupos</strong><small>Grupos, papéis e permissões</small></button><button class="card admin-card" onclick="openModal()"><span class="admin-icon">▤</span><strong>Conteúdo dos módulos</strong><small>Formulários, arquivos e gráficos</small></button></div>
+    </section>
+
+    <section class="screen" id="about">
+      <div class="section-head"><div><div class="eyebrow">PLANEJAMENTO INTEGRADO</div><h2>Sobre</h2><p>Plano Diretor · visão integrada do planejamento e dos projetos estratégicos.</p></div></div>
+      <article class="panel"><div class="panel-head"><div><h3>Plano Diretor</h3><p>Iniciativas, ciclos e conteúdos para apoiar o acompanhamento do plano.</p></div><span class="pill">Versão demonstrativa</span></div><p class="muted" style="font-size:11px;line-height:1.8">O Plano Diretor reúne informações estratégicas, módulos, conteúdos e equipes responsáveis em uma experiência centralizada. Use a navegação superior para acessar os módulos, os relatórios, o histórico de eventos e as ferramentas de gestão documental.</p><div class="component-samples" style="margin-top:16px"><button class="btn primary" data-go="home">Voltar ao início</button><button class="btn" data-go="plano">Explorar o plano</button></div></article>
+    </section>
+
+    <section class="screen" id="components">
+      <div class="section-head"><div><div class="eyebrow">BIBLIOTECA VISUAL</div><h2>Componentes e estados</h2><p>Controles, ações e componentes visuais utilizados no Plano Diretor.</p></div></div>
+      <div class="grid component-grid">
+        <article class="panel"><div class="panel-head"><div><h3>Botões e ações</h3><p>Ações primária, secundária e destrutiva</p></div></div><div class="component-samples"><button class="btn primary" onclick="toast('Ação primária')">Salvar alterações</button><button class="btn" onclick="toast('Ação secundária')">Cancelar</button><button class="btn gold" onclick="toast('Ação destacada')">Enviar</button><button class="btn danger" onclick="toast('Ação de remoção')">Remover</button><button class="btn" disabled>Desabilitado</button></div></article>
+        <article class="panel"><div class="panel-head"><div><h3>Campos e filtros</h3><p>Entrada de texto, seleção e busca</p></div></div><div class="component-samples"><input class="input sample-input" placeholder="Buscar..."><select class="select"><option>Selecionar módulo</option><option>Engenharia</option></select><button class="btn" onclick="openModal()">Abrir modal</button></div></article>
+        <article class="panel"><div class="panel-head"><div><h3>Status e indicadores</h3><p>Identificação visual de situações</p></div></div><div class="component-samples"><span class="pill">Concluído</span><span class="pill progress">Em andamento</span><span class="pill warn">Atenção</span><span class="pill" style="background:#fdebed;color:#b34b52">Reprovado</span></div><div style="margin-top:18px;max-width:260px"><span class="muted" style="font-size:9px">Progresso do ciclo · 72%</span><div class="progress-track"><i></i></div></div></article>
+        <article class="panel"><div class="panel-head"><div><h3>Elementos do plano</h3><p>Linha do tempo e módulo</p></div></div><div class="cycle" style="padding:2px"><button>2024</button><span class="cycle-line"></span><button class="active">2025</button><span class="cycle-line"></span><button>2026</button></div><button class="module-card" onclick="toast('Componente de módulo')"><span>Engenharia · módulo do plano</span><span>→</span></button></article>
+        <article class="panel"><div class="panel-head"><div><h3>Gráfico e modal de envio</h3><p>Visualização de indicadores e confirmação</p></div></div><div class="component-samples"><button class="btn" onclick="openModal()">Pré-visualizar relatório</button><button class="btn primary" onclick="toast('Relatório enviado')">Enviar gráfico</button></div></article>
+        <article class="panel"><div class="panel-head"><div><h3>Tabela e atividade</h3><p>Eventos, responsáveis e status</p></div></div><div class="event-meta" style="margin:0;border:0;padding:0"><span>▦ Módulo</span><span>◉ Responsável</span><span>◷ Data</span><span class="pill">Concluído</span></div></article>
+      </div>
+    </section>
+  </main>
+  <div class="modal-backdrop" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" onclick="if(event.target===this)closeModal()"><div class="modal"><h3 id="modalTitle">Pré-visualizar relatório</h3><p>O relatório reúne os gráficos de evolução, a distribuição dos projetos e os eventos do ciclo selecionado. Os valores desta demonstração são mockados.</p><div class="panel" style="box-shadow:none;margin-top:14px"><div class="panel-head"><div><h3>Evolução do plano</h3><p>Planejado x realizado</p></div><span class="pill">2026</span></div><div class="chart" style="height:120px"><div class="bar-group"><i class="bar plan" style="height:50%"></i><i class="bar" style="height:42%"></i></div><div class="bar-group"><i class="bar plan" style="height:70%"></i><i class="bar" style="height:62%"></i></div><div class="bar-group"><i class="bar plan" style="height:88%"></i><i class="bar" style="height:81%"></i></div></div></div><div class="modal-actions"><button class="btn" onclick="closeModal()">Voltar</button><button class="btn primary" onclick="closeModal();toast('Relatório enviado')">Enviar</button></div></div></div>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script>
+    const demoEvents=[
+      {title:"Marco de engenharia concluído",description:"Entrega do estudo de viabilidade do corredor norte.",module:"Engenharia",actor:"Equipe de Planejamento",date:"03 out. 2026 · 10:20",status:"Concluído"},
+      {title:"Revisão de orçamento solicitada",description:"Ajustar a previsão de investimento da fase de implantação.",module:"Investimentos",actor:"Comitê Diretor",date:"02 out. 2026 · 15:45",status:"Atenção"},
+      {title:"Cronograma atualizado",description:"As datas de início e término foram revisadas para o ciclo atual.",module:"Cronograma",actor:"Mariana Costa",date:"01 out. 2026 · 09:10",status:"Concluído"},
+      {title:"Análise de riscos em andamento",description:"Levantamento de riscos operacionais da etapa de execução.",module:"Gestão de riscos",actor:"Escritório de Projetos",date:"29 set. 2026 · 14:00",status:"Em andamento"},
+      {title:"Indicadores trimestrais publicados",description:"Painel de desempenho atualizado com resultados do trimestre.",module:"Indicadores",actor:"Equipe de Planejamento",date:"26 set. 2026 · 11:30",status:"Concluído"},
+      {title:"Documento enviado para aprovação",description:"Plano de comunicação encaminhado para validação da liderança.",module:"Comunicação",actor:"Rafael Mendes",date:"23 set. 2026 · 16:15",status:"Em andamento"}
+    ];
+    const approvals=[
+      {title:"Anexo do Plano Diretor - fase 03",file:"PLANO-DIRETOR-FASE03.pdf",sender:"Gabinete de Planejamento",due:"Hoje, 18:00",status:"Pendente"},
+      {title:"Checklist de revisão técnica",file:"CHECKLIST-REVISAO.XLSX",sender:"Equipe Técnica",due:"Amanhã, 09:00",status:"Em revisão"},
+      {title:"Relatório de acompanhamento trimestral",file:"RELATORIO-TRIMESTRE.docx",sender:"Suporte Executivo",due:"Quinta, 16:00",status:"Aprovado"}
+    ];
+    const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+    function renderEvents(){const q=document.getElementById("eventSearch").value.toLocaleLowerCase("pt-BR"),st=document.getElementById("eventStatus").value;const list=demoEvents.filter(e=>(st==="Todos"||e.status===st)&&(!q||`${e.title} ${e.description} ${e.module} ${e.actor}`.toLocaleLowerCase("pt-BR").includes(q)));document.getElementById("eventCount").textContent=list.length;document.getElementById("eventList").innerHTML=list.length?list.map(e=>`<article class="event-card"><div class="event-rail"><i class="event-dot ${e.status==="Atenção"?"warn":""}"></i></div><div class="event-content"><div class="event-top"><div><h3>${esc(e.title)}</h3><p>${esc(e.description)}</p></div><span class="pill ${e.status==="Atenção"?"warn":e.status==="Em andamento"?"progress":""}">${esc(e.status)}</span></div><div class="event-meta"><span>▦ ${esc(e.module)}</span><span>◉ ${esc(e.actor)}</span><span>◷ ${esc(e.date)}</span></div></div></article>`).join(""):`<div class="panel muted" style="text-align:center;padding:32px">Nenhum evento encontrado. Tente outro termo ou remova os filtros.</div>`}
+    function renderReportTable(){document.getElementById("reportTable").innerHTML=demoEvents.slice(0,4).map(e=>`<tr><td><strong>${esc(e.title)}</strong><small>${esc(e.description)}</small></td><td>${esc(e.module)}</td><td>${esc(e.actor)}</td><td>${esc(e.date.split(" · ")[0])}</td><td><span class="pill ${e.status==="Atenção"?"warn":e.status==="Em andamento"?"progress":""}">${esc(e.status)}</span></td></tr>`).join("")}
+    function renderApprovals(){document.getElementById("approvalList").innerHTML=approvals.map((a,i)=>`<article class="approval"><div class="approval-head"><div><h3>${esc(a.title)}</h3><p>${esc(a.file)} · ${esc(a.sender)} · Prazo: ${esc(a.due)}</p></div><span class="pill ${a.status==="Pendente"?"warn":a.status==="Em revisão"?"progress":""}">${esc(a.status)}</span></div><p>Gestão documental · Planejamento · Prioridade média</p><div class="approval-actions"><button class="btn small" onclick="setApproval(${i},'Aprovado')">Aprovar</button><button class="btn small" onclick="setApproval(${i},'Em revisão')">Solicitar ajustes</button><button class="btn small danger" onclick="setApproval(${i},'Reprovado')">Reprovar</button></div></article>`).join("");document.getElementById("pendingCount").textContent=approvals.filter(a=>a.status==="Pendente").length;document.getElementById("reviewCount").textContent=approvals.filter(a=>a.status==="Em revisão").length;document.getElementById("approvedCount").textContent=approvals.filter(a=>a.status==="Aprovado").length;document.getElementById("rejectedCount").textContent=approvals.filter(a=>a.status==="Reprovado").length}
+    function setApproval(i,status){approvals[i].status=status;renderApprovals();toast("Status atualizado: "+status)}
+    document.querySelectorAll("[data-screen]").forEach(b=>b.addEventListener("click",()=>showScreen(b.dataset.screen)));
+    document.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",()=>showScreen(b.dataset.go)));
+    function showScreen(name){document.querySelectorAll(".screen").forEach(s=>s.classList.toggle("active",s.id===name));document.querySelectorAll(".main-nav button").forEach(b=>b.classList.toggle("active",b.dataset.screen===name));window.scrollTo({top:0,behavior:"smooth"})}
+    function clearEventFilters(){document.getElementById("eventSearch").value="";document.getElementById("eventStatus").value="Todos";renderEvents()}
+    document.getElementById("eventSearch").addEventListener("input",renderEvents);document.getElementById("eventStatus").addEventListener("change",renderEvents);
+    function exportCsv(){const rows=[["Data","Evento","Módulo","Responsável","Status"],...demoEvents.map(e=>[e.date,e.title,e.module,e.actor,e.status])];const csv="\ufeff"+rows.map(row=>row.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(";")).join("\n");const a=document.createElement("a");const u=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8"}));a.href=u;a.download="relatorio-plano-diretor.csv";a.click();setTimeout(()=>URL.revokeObjectURL(u),1000);toast("Relatório CSV exportado")}
+    function showFiles(input){const files=[...input.files];document.getElementById("fileNames").textContent=files.map(f=>`${f.name} · ${(f.size/1024/1024).toFixed(2)} MB`).join("  |  ");document.getElementById("fileCount").textContent=files.length}
+    function submitUpload(e){e.preventDefault();document.getElementById("uploadStatus").textContent="Em revisão";toast("Arquivos enviados para aprovação")}
+    function sideActive(btn){btn.parentElement.querySelectorAll("button").forEach(b=>b.classList.remove("active"));btn.classList.add("active");toast("Seção: "+btn.textContent)}
+    function selectPlanSection(btn,id){btn.parentElement.querySelectorAll("button").forEach(b=>b.classList.remove("active"));btn.classList.add("active");document.querySelectorAll(".plan-view").forEach(view=>view.classList.toggle("active",view.id===id))}
+    document.querySelectorAll("[data-cycle]").forEach(button=>button.addEventListener("click",()=>{document.querySelectorAll("[data-cycle]").forEach(item=>item.classList.toggle("selected",item===button));document.getElementById("mapCycleTitle").textContent=`Ciclo ${button.dataset.cycle}`}));
+    document.getElementById("corridorFilter").addEventListener("change",event=>{const corridor=event.target.value;document.getElementById("selectedCorridor").textContent=corridor?`Corredor ${corridor}`:"Selecione um corredor no mapa";document.querySelector(".map-focus strong").textContent=corridor?"Corredor selecionado":"Acesse selecionando no mapa!";document.querySelector(".map-print").disabled=!corridor});
+    function openModal(){document.getElementById("modal").classList.add("open")}function closeModal(){document.getElementById("modal").classList.remove("open")}
+    let toastTimer;function toast(text){const t=document.getElementById("toast");t.textContent=text;t.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove("show"),2400)}
+    document.getElementById("reportPeriod").addEventListener("change",e=>{document.getElementById("milestoneValue").innerHTML=e.target.value==="30"?'21 <span class="muted" style="font-size:13px">/ 32</span>':e.target.value==="90"?'24 <span class="muted" style="font-size:13px">/ 32</span>':'28 <span class="muted" style="font-size:13px">/ 32</span>';toast("Período atualizado")});
+    document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
+    renderEvents();renderReportTable();renderApprovals();
+  </script>
+</body>
+</html>

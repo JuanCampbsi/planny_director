@@ -25,6 +25,10 @@ import { TiposConteudoClassService } from '../services/TiposConteudoClassService
 import { ItemsMenuService } from '../services/ItemsMenuService';
 import ResponsibleTeam from '../pages/ResponsibleTeam';
 import OptionBoxConteudoModulo from '../pages/Admin/components/OptionBoxConteudoModulo';
+import UploadArquivos from '../pages/UploadArquivos';
+import FluxoAprovacao from '../pages/FluxoAprovacao';
+import Relatorios from '../pages/relatorios';
+import Eventos from '../pages/eventos';
 
 const RoutesApp = (props: IAppProps) => {
   const moduloService = new ModuloClassService();
@@ -103,6 +107,22 @@ const RoutesApp = (props: IAppProps) => {
               <Route path="/Conteudo/:slug">
                 <Header urlPicture={pictureProfile} />
                 <Modulo {...props} />
+              </Route>
+              <Route path="/UploadArquivos/">
+                <Header urlPicture={pictureProfile} />
+                <UploadArquivos />
+              </Route>
+              <Route path="/FluxoAprovacao/">
+                <Header urlPicture={pictureProfile} />
+                <FluxoAprovacao />
+              </Route>
+              <Route path="/Relatorios/">
+                <Header urlPicture={pictureProfile} />
+                <Relatorios />
+              </Route>
+              <Route path="/Eventos/">
+                <Header urlPicture={pictureProfile} />
+                <Eventos />
               </Route>
               <Route path="/EquipeResponsavel/">
                 <Header urlPicture={pictureProfile} />

@@ -6,6 +6,7 @@ import Informative from './components/Informative';
 import ModulesBox from './components/ModulesBox';
 import Mapa from './components/Mapa';
 import Description from './components/Description';
+import { useHistory } from 'react-router-dom';
 import {
   clearGroupsTeamEdicao,
   clearGroupsTeamLeitura,
@@ -18,6 +19,7 @@ import { setSelectedCorredor } from '../../../../dataflow/reducers/EventMapa';
 
 const Home = (props: IAppProps): JSX.Element => {
   const dispatch = useAppDispatch();
+  const history = useHistory();
 
   const reload = () => {
     dispatch(setListFilterComplexo(null));
@@ -39,6 +41,16 @@ const Home = (props: IAppProps): JSX.Element => {
         <Informative />
         <Mapa {...props} />
         <Description />
+        <S.ActionsSection>
+          <S.ActionCard onClick={() => history.push('/UploadArquivos')}>
+            <S.ActionLabel>Upload de arquivos</S.ActionLabel>
+            <S.ActionDescription>Cadastre documentos para envio e acompanhamento.</S.ActionDescription>
+          </S.ActionCard>
+          <S.ActionCard onClick={() => history.push('/FluxoAprovacao')}>
+            <S.ActionLabel>Fluxo de aprovação</S.ActionLabel>
+            <S.ActionDescription>Revise itens em pendência, aprovações e ajustes.</S.ActionDescription>
+          </S.ActionCard>
+        </S.ActionsSection>
         <ModulesBox />
         <S.FooterBottom />
       </S.Container>
